@@ -82,7 +82,6 @@ class Rocket(object):
             cmds.xform(self.fuel_tank_name, t=[tankBB[3] * 2, tankBB[4] * 0.5, 0], r=1)
             
             rotation_angle = 360 / self.fuelTanks  # Calculate rotation angle for each tank
-            #rotation_angle = 90 * (tank + 1)  # Calculate rotation angle for each tank
             cmds.xform(tank_Grp, ro=[0, rotation_angle * tank, 0], r=1)
             tanks.append(tank_Grp)
 
@@ -91,12 +90,12 @@ class Rocket(object):
         cmds.parent()
 
 
-class SuperRocket(Rocket):
+class RocketNew(Rocket):
     '''
     This class adds a bit of variation to the class Rocket by adding fins at the side of the body.
     '''
     def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1, noseConeHeight = 1, fuelTanks = 1):
-        super(SuperRocket, self).__init__(axis, height, radius, nummber_of_bodyparts, noseConeHeight, fuelTanks)
+        super(RocketNew, self).__init__(axis, height, radius, nummber_of_bodyparts, noseConeHeight, fuelTanks)
 
         self.create_fins()
 
@@ -125,7 +124,7 @@ class SuperRocket(Rocket):
 
             fin_width = bb[3] - bb[0]
             fin_offset = self.radius + fin_width / 2  # Calculate the offset from the RocketBody's radius
-            print(fin_offset)
+            
             side = cmds.xform(self.body_Grp, q=1, bb=1)
 
             #offset = side[3] + fin_offset
@@ -141,6 +140,6 @@ class SuperRocket(Rocket):
         cmds.parent()
 
 
-#myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 6)
+#myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 4)
 
-mySuperRocket = SuperRocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 6)
+mySuperRocket = RocketNew(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 4)
