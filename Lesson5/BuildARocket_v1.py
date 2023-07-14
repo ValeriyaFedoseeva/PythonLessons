@@ -13,8 +13,8 @@ class Rocket(object):
         self.fuelTanks = fuelTanks
         self.body_Grp = None
 
-        self.create_body()
-        self.create_fueltank()
+        #self.create_body()
+        #self.create_fueltank()
 
     def create_body(self):
 
@@ -88,25 +88,16 @@ class Rocket(object):
         cmds.select(tanks)
         cmds.select(self.body_Grp, add=1)
         cmds.parent()
-
+    
+    def generateModel(self):
+        self.create_body()
+        self.create_fueltank()
 
 class RocketNew(Rocket):
-    '''
-    This class adds a bit of variation to the class Rocket by adding fins at the side of the body.
-    '''
-    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1, noseConeHeight = 1, fuelTanks = 1):
+    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1, noseConeHeight=1, fuelTanks=1):
         super(RocketNew, self).__init__(axis, height, radius, nummber_of_bodyparts, noseConeHeight, fuelTanks)
 
-        self.create_fins()
-
     def create_fins(self):
-        
-        '''
-        This funtion creates 4 Fins at theside of the body of rocket we created with the class Rocket.
-        Each Fin is offset to be on the side of the body, and then is put in its own group which is then rotated by 90 degrees. 
-        At the end, each element is parented to the top group.
-        '''
-
         name = "Fin"
         fins = []
         for f in range(4):
@@ -120,15 +111,12 @@ class RocketNew(Rocket):
             cmds.setAttr(self.fin_node + '.depth', 0.5)
 
             bb = cmds.xform(self.fin_name, q=1, bb=True, ws=True)
-            # [X_min, Y_min, Z_min, X_max, Y_max, Z_max]
 
             fin_width = bb[3] - bb[0]
-            fin_offset = self.radius + fin_width / 2  # Calculate the offset from the RocketBody's radius
-            
+            fin_offset = self.radius + fin_width / 2
+
             side = cmds.xform(self.body_Grp, q=1, bb=1)
 
-            #offset = side[3] + fin_offset
- 
             fin_Grp = cmds.group(name="{}{}".format(name, '_Grp') + str(f + 1))
             cmds.xform(fin, t=[fin_offset, side[4] * 0.35, 0], r=1)
             rotation_angle_fin = 90 * (f + 1)
@@ -139,7 +127,14 @@ class RocketNew(Rocket):
         cmds.select(self.body_Grp, add=1)
         cmds.parent()
 
+    def generateNewModel(self):
+        self.create_body()
+        self.create_fueltank()
+        self.create_fins()
 
 #myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 4)
+#myRocket.generateModel()
 
-mySuperRocket = RocketNew(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 4)
+mySuperRocket = RocketNew(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight=10, fuelTanks=4)
+mySuperRocket.generateNewModel()
+
