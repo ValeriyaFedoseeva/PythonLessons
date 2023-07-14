@@ -123,7 +123,6 @@ class SuperRocket(Rocket):
             print(fin_offset)
             side = cmds.xform(self.body_Grp, q=1, bb=1)
 
-            #offset = side[3] + fin_offset
  
             fin_Grp = cmds.group(name="{}{}".format(name, '_Grp') + str(f + 1))
             cmds.xform(fin, t=[fin_offset, side[4] * 0.35, 0], r=1)
@@ -136,7 +135,7 @@ class SuperRocket(Rocket):
         cmds.parent()
 
 
-myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6)
+#myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6)
 
 mySuperRocket = SuperRocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6)
 
