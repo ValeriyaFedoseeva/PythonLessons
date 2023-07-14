@@ -3,12 +3,14 @@ import maya.cmds as cmds
 
 class Rocket(object):
 
-    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1):
+    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1, noseConeHeight = 1, fuelTanks = 1):
 
         self.axis = axis
         self.height = height
         self.radius = radius
         self.nummber_of_bodyparts = nummber_of_bodyparts
+        self.noseConeHeight = noseConeHeight
+        self.fuelTanks = fuelTanks
         self.body_Grp = None
 
         self.create_body()
@@ -47,9 +49,10 @@ class Rocket(object):
 
         cmds.setAttr(self.rocket_top_node + '.radius', self.radius)
         cmds.setAttr(self.rocket_top_node + '.subdivisionsAxis', self.axis)
-        cmds.setAttr(self.rocket_top_node + '.height', self.height * 2)
+        cmds.setAttr(self.rocket_top_node + '.height', self.noseConeHeight)
 
-        top_offset = topBB[4] + self.height * 1
+        top_offset = topBB[4] + self.noseConeHeight * 0.5
+        #top_offset = cmds.xform(self.rocket_top_nam, q=1, bb=1, ws=1)
 
         cmds.xform(self.rocket_top_name, t=[0, top_offset, 0], r=1)
         cmds.parent(self.rocket_top_name, body_Grp)
@@ -63,7 +66,7 @@ class Rocket(object):
         '''
 
         tanks = []
-        for tank in range(4):
+        for tank in range(self.fuelTanks):
             name = 'Fuel_Tank'
             fuel_tank = cmds.polyCone(name=name + str(tank + 1))
 
@@ -77,8 +80,10 @@ class Rocket(object):
             tankBB = cmds.xform(self.fuel_tank_name, q=1, bb=1, ws=1)
             tank_Grp = cmds.group(name="{}{}".format(name, '_Grp') + str(tank + 1))
             cmds.xform(self.fuel_tank_name, t=[tankBB[3] * 2, tankBB[4] * 0.5, 0], r=1)
-            rotation_angle = 90 * (tank + 1)  # Calculate rotation angle for each tank
-            cmds.xform(tank_Grp, ro=[0, rotation_angle, 0], r=1)
+            
+            rotation_angle = 360 / self.fuelTanks  # Calculate rotation angle for each tank
+            #rotation_angle = 90 * (tank + 1)  # Calculate rotation angle for each tank
+            cmds.xform(tank_Grp, ro=[0, rotation_angle * tank, 0], r=1)
             tanks.append(tank_Grp)
 
         cmds.select(tanks)
@@ -90,8 +95,8 @@ class SuperRocket(Rocket):
     '''
     This class adds a bit of variation to the class Rocket by adding fins at the side of the body.
     '''
-    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1):
-        super(SuperRocket, self).__init__(axis, height, radius, nummber_of_bodyparts)
+    def __init__(self, axis=1, height=1, radius=1, nummber_of_bodyparts=1, noseConeHeight = 1, fuelTanks = 1):
+        super(SuperRocket, self).__init__(axis, height, radius, nummber_of_bodyparts, noseConeHeight, fuelTanks)
 
         self.create_fins()
 
@@ -123,6 +128,7 @@ class SuperRocket(Rocket):
             print(fin_offset)
             side = cmds.xform(self.body_Grp, q=1, bb=1)
 
+            #offset = side[3] + fin_offset
  
             fin_Grp = cmds.group(name="{}{}".format(name, '_Grp') + str(f + 1))
             cmds.xform(fin, t=[fin_offset, side[4] * 0.35, 0], r=1)
@@ -135,8 +141,6 @@ class SuperRocket(Rocket):
         cmds.parent()
 
 
-#myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6)
+#myRocket = Rocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 6)
 
-mySuperRocket = SuperRocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6)
-
-
+mySuperRocket = SuperRocket(axis=18, height=5, radius=4, nummber_of_bodyparts=6, noseConeHeight = 10, fuelTanks = 6)
