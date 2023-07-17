@@ -60,7 +60,7 @@ class Rocket(object):
     def create_fueltank(self):
 
         '''
-        This funtion creates 4 fuel tanks at the base of the body of rocket we created with the function above.
+        This funtion creates fuel tanks at the base of the body of rocket we created with the function above.
         Each tank is offset to be on the side of the body, and then each tank is put in its own group which is then rotated by 90 degrees. 
         At the end, each element is parented to the top group.
         '''
