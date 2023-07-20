@@ -16,6 +16,11 @@ class MyWindow(QtWidgets.QDialog):
         self.setup_UI()
 
     def setup_UI(self):
+
+        '''
+        With this fuction we determine size and layout of UI window.
+        '''
+
         self.setWindowTitle("Create Poly Primitives")
         self.setMinimumSize(300, 200)
         self.setMaximumSize(600, 800)
@@ -72,9 +77,19 @@ class MyWindow(QtWidgets.QDialog):
         self.slider.valueChanged.connect(self.update_line_edit)
 
     def update_line_edit(self, value):
+
+        '''
+        This function updates the number in the textfield next to the splder depending on slider marker position.
+        '''
+
         self.show_set_number.setText(str(value))       
 
     def create_top_textfield(self):
+
+        '''
+        This function creates a text field where User can enter desired name for the object.
+        '''
+
         # Text Line
         self.nameLabel = QtWidgets.QLabel(self)
         self.nameLabel.setText('Name:')
@@ -83,6 +98,11 @@ class MyWindow(QtWidgets.QDialog):
         self.text_field_layout.addWidget(self.saveNameField)
 
     def create_upper_radiobuttons(self):
+
+        '''
+        This function creates radio buttons which determine what type of primitive will be created Sphere, Cube, Cone
+        '''
+
         # Radio Buttons
         self.rbutton_sphere = QtWidgets.QRadioButton("Sphere")
         self.rbutton_sphere.setChecked(True)
@@ -94,6 +114,14 @@ class MyWindow(QtWidgets.QDialog):
         self.radio_btn_layout.addWidget(self.rbutton_cone)
 
     def create_checkboxes(self):
+
+        '''
+        This function creates checkboxes with additional settings for the user to add when creating a primitive.
+        To create a group and place primitive in it.
+        To creare a display layer and add the primitive there.
+        To create an offset. (Offset axis and value is determined in setup_UI function)
+        '''
+
         # Check box
         self.chk_box_group = QtWidgets.QCheckBox("Group")
         self.chk_box_layer = QtWidgets.QCheckBox("Display Layer")
@@ -105,6 +133,11 @@ class MyWindow(QtWidgets.QDialog):
 
 
     def create_lower_radiobuttons(self):
+
+        '''
+        This fuction adds checkboxes for the user to choose in which axes the object will be offset in.
+        '''
+
         # Radio Buttons
         self.chk_button_X = QtWidgets.QCheckBox("X")
         self.chk_button_X.setChecked(True)
@@ -118,6 +151,9 @@ class MyWindow(QtWidgets.QDialog):
 
 
     def create_action_buttons(self):
+        '''
+        In this function we create buttons that will operate the script.
+        '''
         # Buttons
         self.button_create = QtWidgets.QPushButton("Create")
         self.button_create.clicked.connect(self.on_button_create_clicked)
@@ -133,13 +169,12 @@ class MyWindow(QtWidgets.QDialog):
         self.btn_layout.addWidget(self.button_close)
 
 
-    def operation(self):
-        newName = cmds.textField("ItemName", q=True, text=True)
-
-        radio_selection = cmds.radioCollection(radioCollection, query=True, sl=True)
-
-
     def on_button_create_clicked(self):
+
+        '''
+        This function runs the main programm depending on the settings that were set in the UI by the user.
+        '''
+
         suffix = '_Geo'
         gp = '_Grp'
         lyr = '_Layer'
@@ -202,6 +237,11 @@ class MyWindow(QtWidgets.QDialog):
         
 
     def on_button_close_clicked(self):
+
+        '''
+        This function closes the UI window when the "Close" button is clicked.
+        '''
+
         print("Close is clicked")
         self.close()
 
