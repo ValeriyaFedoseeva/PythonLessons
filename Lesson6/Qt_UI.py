@@ -1,13 +1,15 @@
 import maya.cmds as cmds
 from PySide2 import QtWidgets, QtCore, QtGui
 
+from maya.app.general.mayaMixin import MayaQWidgetBaseMixin
+
 if cmds.window("MyQtUI", exists=True):
     cmds.deleteUI("MyQtUI", window=True)
 
 if cmds.windowPref("MyQtUI", exists=True):
     cmds.windowPref("MyQtUI", remove=True)
 
-class MyWindow(QtWidgets.QDialog):
+class MyWindow(MayaQWidgetBaseMixin, QtWidgets.QDialog):
 
     def __init__(self, parent=None):
 
