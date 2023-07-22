@@ -1,13 +1,7 @@
 import maya.cmds as cmds
 from PySide2 import QtWidgets, QtCore, QtGui
-
 from maya.app.general.mayaMixin import MayaQWidgetBaseMixin
 
-if cmds.window("MyQtUI", exists=True):
-    cmds.deleteUI("MyQtUI", window=True)
-
-if cmds.windowPref("MyQtUI", exists=True):
-    cmds.windowPref("MyQtUI", remove=True)
 
 class MyWindow(MayaQWidgetBaseMixin, QtWidgets.QDialog):
 
@@ -234,12 +228,15 @@ class MyWindow(MayaQWidgetBaseMixin, QtWidgets.QDialog):
         '''
         This function closes the UI window when the "Close" button is clicked.
         '''
-        print("Close is clicked")
         self.close()
 
+def clean_ui():
+    if cmds.window("Create Poly Primitives", exists=True):
+        cmds.deleteUI("Create Poly Primitives", window=True)
 
+    if cmds.windowPref("Create Poly Primitives", exists=True):
+        cmds.windowPref("Create Poly Primitives", remove=True)
 
-
-
+clean_ui()
 win = MyWindow()
 win.show()
