@@ -127,7 +127,7 @@ class Selection_Set_Widget(QtWidgets.QWidget):
         self.set_background(160, 25, 150)
 
         if event.button() == QtCore.Qt.LeftButton:
-            cmds.select(self.selection)  # Call get_selected method to record selected objects
+            cmds.select(self.selection) 
 
         elif event.button() == QtCore.Qt.RightButton:
             self.onContextMenu(event.pos())
@@ -170,10 +170,10 @@ class MyCustomWidget(QtWidgets.QDialog):
         self.scroll_layout = QtWidgets.QVBoxLayout()
         self.scroll_layout.setAlignment(QtCore.Qt.AlignTop)
         self.scroll_layout.setContentsMargins(3,0,3,0)
-        self.scroll_layout.setSpacing(5) #layout
+        self.scroll_layout.setSpacing(5)
         self.scroll_area_widget.setLayout(self.scroll_layout)
 
-        self.main_layout.addWidget(self.scrollArea) #add to main layout
+        self.main_layout.addWidget(self.scrollArea) 
 
 
         self.btn_new = QtWidgets.QPushButton("Create New Set")
