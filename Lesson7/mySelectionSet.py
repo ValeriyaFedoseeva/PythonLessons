@@ -47,7 +47,13 @@ class Selection_Set_Widget(QtWidgets.QWidget):
         self.setAutoFillBackground(True)
 
         self.set_count = set_count 
-
+        self.setStyleSheet("""
+            QLabel {
+                color: rgb(255, 255, 255);
+                font-size: 18px;
+                font-weight: bold;
+            }
+        """)
         self.set_background()
 
         self.setup_ui()
@@ -85,10 +91,6 @@ class Selection_Set_Widget(QtWidgets.QWidget):
 
         #Naming
         self.lable = QtWidgets.QLabel("SET {}".format(self.set_count))
-        self.font = self.lable.font()
-        self.font.setPointSize(10)
-        self.font.setBold(True)
-        self.lable.setFont(self.font)
         self.main_layout.addWidget(self.lable)
         
     def onContextMenu(self, point):
@@ -131,7 +133,9 @@ class Selection_Set_Widget(QtWidgets.QWidget):
         self.color = QtGui.QColor()
         self.color.setHsv(r, g, b)
         self.p.setColor(self.backgroundRole(), self.color)
-        self.setPalette(self.p)
+        self.setPalette(self.p)    
+
+
 
     def enterEvent(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
@@ -143,9 +147,10 @@ class Selection_Set_Widget(QtWidgets.QWidget):
 
     def mousePressEvent(self, event):
         self.set_background(160, 10, 150)
+        pass
 
     def mouseReleaseEvent(self, event):
-        #self.set_background(160, 25, 150)
+        self.set_background(160, 25, 150)
 
         if event.button() == QtCore.Qt.LeftButton:
             cmds.select(self.selection) 
@@ -216,14 +221,14 @@ class MyCustomWidget(QtWidgets.QDialog):
         self.btn_new = QtWidgets.QPushButton("Create New Set")
         self.btn_new.setStyleSheet("""
             QPushButton {
-                background-color: rgb(140, 200, 190);
+                background-color: rgb(100, 100, 100);
                 border-radius: 5px;
                 min-height: 80px;
                 font-weight: 900;
                 font-size: 18px;
             }
             QPushButton:hover {
-                background-color: rgb(200, 230, 225);
+                background-color: rgb(100, 100, 100);
             }
         """) 
         self.btn_new.clicked.connect(self.create_new_selection_set)
