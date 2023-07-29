@@ -56,15 +56,15 @@ class Selection_Set_Widget(QtWidgets.QWidget):
 
         self.popMenu = QtWidgets.QMenu(self)
 
-        self.popMenuAdd = QtWidgets.QAction('Add selected object to set', self)
+        self.popMenuAdd = QtWidgets.QAction('Add to set', self)
         self.popMenu.addAction(self.popMenuAdd)
         self.popMenuAdd.triggered.connect(self.cont_add_obj)
 
-        self.popMenuDel = QtWidgets.QAction('Delete selected object from set', self)
+        self.popMenuDel = QtWidgets.QAction('Delete from set', self)
         self.popMenu.addAction(self.popMenuDel)
         self.popMenuDel.triggered.connect(self.cont_del_obj)   
 
-        self.popMenuDel = QtWidgets.QAction('Select all objects in this set', self)
+        self.popMenuDel = QtWidgets.QAction('Select all', self)
         self.popMenu.addAction(self.popMenuDel)
         self.popMenuDel.triggered.connect(self.cont_sel_obj)         
 
@@ -76,6 +76,7 @@ class Selection_Set_Widget(QtWidgets.QWidget):
         self.setMouseTracking(True)  
         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(self.onContextMenu)
+
 
     def setup_ui(self):
         # layout 
@@ -213,10 +214,18 @@ class MyCustomWidget(QtWidgets.QDialog):
         self.main_layout.addWidget(self.scrollArea) 
 
         self.btn_new = QtWidgets.QPushButton("Create New Set")
-        self.font = self.btn_new.font()
-        self.font.setPointSize(15)
-        self.btn_new.setFont(self.font)
-        self.btn_new.setMinimumHeight(80)
+        self.btn_new.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(140, 200, 190);
+                border-radius: 5px;
+                min-height: 80px;
+                font-weight: 900;
+                font-size: 18px;
+            }
+            QPushButton:hover {
+                background-color: rgb(200, 230, 225);
+            }
+        """) 
         self.btn_new.clicked.connect(self.create_new_selection_set)
         self.main_layout.addWidget(self.btn_new)
 
