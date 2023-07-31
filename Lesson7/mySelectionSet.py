@@ -135,8 +135,6 @@ class Selection_Set_Widget(QtWidgets.QWidget):
         self.p.setColor(self.backgroundRole(), self.color)
         self.setPalette(self.p)    
 
-
-
     def enterEvent(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
         self.set_background(160, 25, 150)
