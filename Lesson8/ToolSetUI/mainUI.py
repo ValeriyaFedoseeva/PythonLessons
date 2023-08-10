@@ -41,8 +41,7 @@ class sphere_tool(base_tool_btn):
         self.suffix = "_Geo"
     def mousePressEvent(self, event):
 
-        obj = cmds.polySphere(n="{}{}".format(self.name, self.suffix))[0]
-
+        obj = cmds.polySphere(n="{}{}".format(self.name, self.suffix), ch=False)[0]
         super(sphere_tool, self).mousePressEvent(event)
 
 class cube_tool(base_tool_btn):
@@ -54,7 +53,7 @@ class cube_tool(base_tool_btn):
         self.suffix = "_Geo"
         
     def mousePressEvent(self, event):
-        obj = cmds.polyCube(n="{}{}".format(self.name, self.suffix))[0]
+        obj = cmds.polyCube(n="{}{}".format(self.name, self.suffix), ch=False)[0]
         super(cube_tool, self).mousePressEvent(event)
 
 class cone_tool(base_tool_btn):
@@ -66,7 +65,7 @@ class cone_tool(base_tool_btn):
         self.suffix = "_Geo"
 
     def mousePressEvent(self, event):
-        obj = cmds.polyCone(n="{}{}".format(self.name, self.suffix))[0]
+        obj = cmds.polyCone(n="{}{}".format(self.name, self.suffix), ch=False)[0]
         super(cone_tool, self).mousePressEvent(event)
 
 class torus_tool(base_tool_btn):
@@ -78,7 +77,7 @@ class torus_tool(base_tool_btn):
         self.suffix = "_Geo"
 
     def mousePressEvent(self, event):
-        obj = cmds.polyTorus(n="{}{}".format(self.name, self.suffix))[0]
+        obj = cmds.polyTorus(n="{}{}".format(self.name, self.suffix), ch=False)[0]
         super(torus_tool, self).mousePressEvent(event)
 
 
@@ -163,18 +162,14 @@ class ToolSet(QtWidgets.QDialog):
         '''
 
     def read_json_data(self, directory=DIR):
-        '''
+
         #CLEAN UP
-        if self.rightField.scroll_layout.count():
-            for i in range(self.rightField.scroll_layout.count()):
-                item = self.rightField.scroll_layout.itemAt(i)
+        if self.scroll_layout.count():
+            for i in range(self.scroll_layout.count()):
+                item = self.scroll_layout.itemAt(i)
                 widget = item.widget()
 
                 widget.deleteLater()
-
-        
-        '''
-
 
         name = "settings"
         path = os.path.join(directory, '%s.json' % name)
