@@ -221,6 +221,11 @@ class anim_transfer(QtWidgets.QDialog):
         an_for_IK = ['Reference_L_foot', 'Reference_R_foot']
         ctrl_IK = ['IKLeg_L', 'IKLeg_R']
         
+        '''
+        an_for_IK = ['Reference_L_foot', 'Reference_R_foot', 'Reference_L_WeaponBone', 'Reference_R_WeaponBone']
+        ctrl_IK = ['IKLeg_L', 'IKLeg_R', 'L_Weapon_ctrl', 'R_Weapon_ctrl']
+        '''
+
         for s, t in zip(an_for_IK, ctrl_IK):
             par = cmds.pointConstraint(s, t, mo=0)
             parOr = cmds.orientConstraint(s, t, mo=1)
@@ -259,6 +264,7 @@ class anim_transfer(QtWidgets.QDialog):
         endTime = cmds.playbackOptions(query=True, maxTime=True)
         cmds.bakeResults(sel, simulation=True, t=(startTime, endTime))
         
+
         toDel_objects = cmds.ls("*toDel_*", type="transform")
         if toDel_objects:
             cmds.delete(toDel_objects)
@@ -270,7 +276,8 @@ class anim_transfer(QtWidgets.QDialog):
         if cmds.objExists('Reference_UMA_Male_Rig'):
             cmds.delete('Reference_UMA_Male_Rig')
         else:
-            pass
+            pass        
+
 
 def onMayaDroppedPythonFile(droppedFile):
     # Custom code to execute when the Python file is dropped

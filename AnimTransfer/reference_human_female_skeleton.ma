@@ -1,6 +1,6 @@
 //Maya ASCII 2019 scene
 //Name: reference_human_female_skeleton.ma
-//Last modified: Thu, Aug 17, 2023 03:45:46 PM
+//Last modified: Fri, Aug 18, 2023 11:13:41 AM
 //Codeset: 1252
 requires maya "2019";
 requires "stereoCamera" "10.0";
@@ -97,6 +97,7 @@ createNode joint -n "Reference_Spine_3" -p "Reference_Spine_2";
 	setAttr ".bps" -type "matrix" 1.5275907850020733e-07 0.98365281271709404 -0.18007538430814429 0
 		 -1.8147042534666462e-07 -0.1800753843081162 -0.98365281271709437 0 -0.99999999999997169 1.8294025370402609e-07 1.5099574467157432e-07 0
 		 2.5489478007632051e-06 1.2239087820050647 -0.0054738759063186196 1;
+	setAttr -k on ".liw";
 	setAttr ".fbxID" 5;
 createNode joint -n "Reference_L_Clavicle" -p "Reference_Spine_3";
 	rename -uid "160531B8-4BBB-3B5E-C27F-AB8DAA6D47A8";
@@ -221,6 +222,19 @@ createNode joint -n "Reference_L_Toe_3_02" -p "Reference_L_Toe_3_01";
 	setAttr ".bps" -type "matrix" 0.05986708570145266 0.96010806856541153 -0.27314543511691686 0
 		 -0.99787457695804382 0.064617539898688472 0.0084203443068564809 0 0.025734426560923861 0.27206078404106016 0.96193589655264611 0
 		 0.51013310726858396 1.0454260192419849 0.05736011276866728 1;
+createNode joint -n "Reference_L_WeaponBone" -p "Reference_L_Hand";
+	rename -uid "0D51BBF5-4B7E-52B4-3E63-BE86D393D5E0";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".oc" 6;
+	setAttr ".t" -type "double3" -0.06 3.4694469519536142e-17 -0.041 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" -5.4660000000000064 0 0 ;
+	setAttr -k on ".ssc" no;
+	setAttr ".bps" -type "matrix" -0.7661154777421858 0.61310654955507493 -0.19278857242205 0
+		 -0.27000096188723655 -0.03481430848406817 0.96223045290862752 0 0.58323799202712179 0.78923274312299452 0.19221113869577067 0
+		 0.53854242563263621 1.0506324236662981 0.008602160164102278 1;
+	setAttr ".radi" 2.5;
 createNode joint -n "Reference_Neck" -p "Reference_Spine_3";
 	rename -uid "0CA22591-4B4B-9FE9-986A-8DB66F718063";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
@@ -387,55 +401,20 @@ createNode joint -n "Reference_R_Toe_3_02" -p "Reference_R_Toe_3_01";
 	setAttr ".bps" -type "matrix" 0.052027759925010908 -0.95351096687868342 0.29683319935489666 0
 		 -0.99863172071515705 -0.048106345158102512 0.020505266080056924 0 -0.0052724357435490789 -0.29749389169797741 -0.95470916295158836 0
 		 -0.50866811851999405 1.0512327989751822 0.066712629147427469 1;
-createNode joint -n "Reference_L_Up_leg" -p "Reference_Pelvis";
-	rename -uid "40F9FA13-497A-FB93-5A52-23AD6A1F4E42";
+createNode joint -n "Reference_R_WeaponBone" -p "Reference_R_Hand";
+	rename -uid "B8387E2E-4021-E201-F1EB-C28D4BDDD98D";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".oc" 2;
-	setAttr ".t" -type "double3" 0.10627650550638523 -0.0024280878843775454 -0.03974876635057123 ;
+	setAttr ".oc" 6;
+	setAttr ".t" -type "double3" 0.061 0 0.049 ;
 	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
 	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -22.821431700258135 -79.991347012057687 -151.81640544050819 ;
+	setAttr ".jo" -type "double3" -5.4660000000000117 0 0 ;
 	setAttr -k on ".ssc" no;
-	setAttr ".bps" -type "matrix" -0.15319112859145514 0.98478152061193891 0.082084315079758496 0
-		 0.09865379992603672 -0.067409246389017366 0.99283604953759508 0 0.98325983640186854 0.16019160453189041 -0.086825940573475521 0
-		 0.10627899999999593 0.9197259999997548 0.0024280600000002655 1;
-createNode joint -n "Reference_L_leg" -p "Reference_L_Up_leg";
-	rename -uid "D1F352D4-475E-396B-63D6-6598753E0161";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".oc" 3;
-	setAttr ".t" -type "double3" -0.39968156923173176 -3.1732561697028761e-05 -0.00021920973687766798 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 0.28826960764621851 2.5465290655501591 0.79616400010653499 ;
-	setAttr -k on ".ssc" no;
-	setAttr ".bps" -type "matrix" -0.19534251699237662 0.9756608733185973 0.099635141041073433 0
-		 0.10567981578512403 -0.080060409996805609 0.9911720876249317 0 0.97502465486299617 0.20414747372018824 -0.087468459360845088 0
-		 0.16728799999999591 0.5260939999997547 -0.030391999999999232 1;
-createNode joint -n "Reference_L_foot" -p "Reference_L_leg";
-	rename -uid "4BE584E1-4515-3A69-8592-34AC187A5028";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".oc" 4;
-	setAttr ".t" -type "double3" -0.44246250177823987 3.7180286655003059e-08 2.6388941931632104e-07 ;
-	setAttr ".r" -type "double3" -14.709 -18.652 0.645 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" 13.258606923028765 6.3831868063060826 -60.513915949289178 ;
-	setAttr -k on ".ssc" no;
-	setAttr ".bps" -type "matrix" 0.025033081645243482 0.52811141640872938 -0.84880603006936028 0
-		 -0.14999686831468645 0.84144429076604488 0.51910735405406694 0 0.98836950798733603 0.11432338954034393 0.10027900221321306 0
-		 0.25371999999999706 0.094400699999755089 -0.074476799999998983 1;
-createNode joint -n "Reference_L_toe" -p "Reference_L_foot";
-	rename -uid "05459142-40F5-8270-9FCB-449E20CB2D42";
-	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
-	setAttr ".oc" 5;
-	setAttr ".t" -type "double3" -0.12751269912385643 -4.6917746898689217e-07 -1.1869053769819615e-06 ;
-	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
-	setAttr ".mxrl" -type "double3" 360 360 360 ;
-	setAttr ".jo" -type "double3" -85.102271502625001 1.9151892503702426 -29.9859007693967 ;
-	setAttr -k on ".ssc" no;
-	setAttr ".bps" -type "matrix" 0.063563399935808881 0.033038749958747685 -0.99743076711607581 0
-		 -0.99745280540083547 -0.030311178277780779 -0.064568827381447216 0 -0.032366575144784165 0.99899433105127067 0.031027912285893675 0
-		 0.25052686146609177 0.027059257377606727 0.033756385351588952 1;
+	setAttr ".pa" -type "double3" 5.466 0 0 ;
+	setAttr ".bps" -type "matrix" -0.77020140754513022 -0.59495272147322698 0.22982830771491322 0
+		 -0.2959511960412049 0.014175073773187573 -0.95509787814930491 0 0.56498024866120777 -0.80363569264631685 -0.1869946312801366 0
+		 -0.53437511457071185 1.0486325930450811 0.018094586984343648 1;
+	setAttr ".radi" 2.5;
 createNode joint -n "Reference_R_Up_leg" -p "Reference_Pelvis";
 	rename -uid "A0F36E8B-491C-935E-05C0-66A350CA3091";
 	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
@@ -486,85 +465,69 @@ createNode joint -n "Reference_R_toe" -p "Reference_R_foot";
 	setAttr ".bps" -type "matrix" 0.063563399935809839 -0.033038749958748413 0.9974307671160757 0
 		 -0.99745280540083547 0.030311178277778836 0.06456882738144834 0 -0.032366575144782264 -0.99899433105127067 -0.031027912285894306 0
 		 -0.25052228169180824 0.027059257751741797 0.033756688168419285 1;
-createNode transform -s -n "persp";
-	rename -uid "0579F5BD-43F9-B4C0-59D7-2BB78C8477CF";
-	setAttr ".v" no;
-	setAttr ".t" -type "double3" 5.5389455401123469 8.3209196442673932 10.86077950293055 ;
-	setAttr ".r" -type "double3" -24.93835272960234 23.000000000000011 -8.6380714602822167e-16 ;
-createNode camera -s -n "perspShape" -p "persp";
-	rename -uid "153FC266-46E1-2920-2CB0-FE93BE7184E5";
-	setAttr -k off ".v" no;
-	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 14.805134910514557;
-	setAttr ".imn" -type "string" "persp";
-	setAttr ".den" -type "string" "persp_depth";
-	setAttr ".man" -type "string" "persp_mask";
-	setAttr ".hc" -type "string" "viewSet -p %camera";
-	setAttr ".ai_translator" -type "string" "perspective";
-createNode transform -s -n "top";
-	rename -uid "A7FDC943-4CA5-F1CF-8FDD-3B982AA4CF38";
-	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0 1000.1 0 ;
-	setAttr ".r" -type "double3" -90 0 0 ;
-createNode camera -s -n "topShape" -p "top";
-	rename -uid "843D48FB-4F75-6922-7DA4-37ADC17BD55B";
-	setAttr -k off ".v" no;
-	setAttr ".rnd" no;
-	setAttr ".coi" 1000.1;
-	setAttr ".ow" 30;
-	setAttr ".imn" -type "string" "top";
-	setAttr ".den" -type "string" "top_depth";
-	setAttr ".man" -type "string" "top_mask";
-	setAttr ".hc" -type "string" "viewSet -t %camera";
-	setAttr ".o" yes;
-	setAttr ".ai_translator" -type "string" "orthographic";
-createNode transform -s -n "front";
-	rename -uid "2DA99371-4F83-3E5F-BCE5-00BD0A1EB10C";
-	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0 0 1000.1 ;
-createNode camera -s -n "frontShape" -p "front";
-	rename -uid "0DEB69ED-4CFA-D3AE-35C1-D18FD94AB600";
-	setAttr -k off ".v" no;
-	setAttr ".rnd" no;
-	setAttr ".coi" 1000.1;
-	setAttr ".ow" 30;
-	setAttr ".imn" -type "string" "front";
-	setAttr ".den" -type "string" "front_depth";
-	setAttr ".man" -type "string" "front_mask";
-	setAttr ".hc" -type "string" "viewSet -f %camera";
-	setAttr ".o" yes;
-	setAttr ".ai_translator" -type "string" "orthographic";
-createNode transform -s -n "side";
-	rename -uid "2B03C7BD-4E2F-B2A5-DCDD-03B9A87841FC";
-	setAttr ".v" no;
-	setAttr ".t" -type "double3" 1000.1 0 0 ;
-	setAttr ".r" -type "double3" 0 90 0 ;
-createNode camera -s -n "sideShape" -p "side";
-	rename -uid "D381F3A8-4315-F3EF-605A-3DB5AA68602F";
-	setAttr -k off ".v" no;
-	setAttr ".rnd" no;
-	setAttr ".coi" 1000.1;
-	setAttr ".ow" 30;
-	setAttr ".imn" -type "string" "side";
-	setAttr ".den" -type "string" "side_depth";
-	setAttr ".man" -type "string" "side_mask";
-	setAttr ".hc" -type "string" "viewSet -s %camera";
-	setAttr ".o" yes;
-	setAttr ".ai_translator" -type "string" "orthographic";
-createNode displayLayer -n "layer1";
-	rename -uid "2522FF4A-4EC8-D7EE-96C6-F8B11073A902";
+createNode joint -n "Reference_L_Up_leg" -p "Reference_Pelvis";
+	rename -uid "40F9FA13-497A-FB93-5A52-23AD6A1F4E42";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".oc" 2;
+	setAttr ".t" -type "double3" 0.10627650550638523 -0.0024280878843775454 -0.03974876635057123 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" -22.821431700258135 -79.991347012057673 -151.81640544050819 ;
+	setAttr -k on ".ssc" no;
+	setAttr ".bps" -type "matrix" -0.15319112859145514 0.98478152061193891 0.082084315079758496 0
+		 0.09865379992603672 -0.067409246389017366 0.99283604953759508 0 0.98325983640186854 0.16019160453189041 -0.086825940573475521 0
+		 0.10627899999999593 0.9197259999997548 0.0024280600000002655 1;
+createNode joint -n "Reference_L_leg" -p "Reference_L_Up_leg";
+	rename -uid "D1F352D4-475E-396B-63D6-6598753E0161";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".oc" 3;
+	setAttr ".t" -type "double3" -0.39968156923173176 -3.1732561697028761e-05 -0.00021920973687766798 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" 0.28826960764621851 2.5465290655501591 0.79616400010653499 ;
+	setAttr -k on ".ssc" no;
+	setAttr ".bps" -type "matrix" -0.19534251699237662 0.9756608733185973 0.099635141041073433 0
+		 0.10567981578512403 -0.080060409996805609 0.9911720876249317 0 0.97502465486299617 0.20414747372018824 -0.087468459360845088 0
+		 0.16728799999999591 0.5260939999997547 -0.030391999999999232 1;
+createNode joint -n "Reference_L_foot" -p "Reference_L_leg";
+	rename -uid "4BE584E1-4515-3A69-8592-34AC187A5028";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".oc" 4;
+	setAttr ".t" -type "double3" -0.44246250177823987 3.7180286655003059e-08 2.6388941931632104e-07 ;
+	setAttr ".r" -type "double3" -14.709 -18.652 0.645 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" 13.258606923028765 6.3831868063060826 -60.513915949289178 ;
+	setAttr -k on ".ssc" no;
+	setAttr ".bps" -type "matrix" 0.025033081645243482 0.52811141640872938 -0.84880603006936028 0
+		 -0.14999686831468645 0.84144429076604488 0.51910735405406694 0 0.98836950798733603 0.11432338954034393 0.10027900221321306 0
+		 0.25371999999999706 0.094400699999755089 -0.074476799999998983 1;
+createNode joint -n "Reference_L_toe" -p "Reference_L_foot";
+	rename -uid "05459142-40F5-8270-9FCB-449E20CB2D42";
+	addAttr -ci true -sn "liw" -ln "lockInfluenceWeights" -min 0 -max 1 -at "bool";
+	setAttr ".oc" 5;
+	setAttr ".t" -type "double3" -0.12751269912385643 -4.6917746898689217e-07 -1.1869053769819615e-06 ;
+	setAttr ".mnrl" -type "double3" -360 -360 -360 ;
+	setAttr ".mxrl" -type "double3" 360 360 360 ;
+	setAttr ".jo" -type "double3" -85.102271502625001 1.9151892503702426 -29.9859007693967 ;
+	setAttr -k on ".ssc" no;
+	setAttr ".bps" -type "matrix" 0.063563399935808881 0.033038749958747685 -0.99743076711607581 0
+		 -0.99745280540083547 -0.030311178277780779 -0.064568827381447216 0 -0.032366575144784165 0.99899433105127067 0.031027912285893675 0
+		 0.25052686146609177 0.027059257377606727 0.033756385351588952 1;
+createNode displayLayer -n "Base_RIG_layer";
+	rename -uid "9CCEB00B-45B2-19C4-6AAE-7AABC535C760";
 	setAttr ".c" 13;
 	setAttr ".do" 1;
 createNode displayLayerManager -n "layerManager";
-	rename -uid "FB968866-4629-3C7D-29E0-58AA513CFD3F";
-	setAttr ".cdl" 101;
-	setAttr -s 102 ".dli[1:101]"  6 41 8 1 30 20 22 24 
+	rename -uid "4C39DF7C-45C5-8A5E-BD64-27A966ECC111";
+	setAttr ".cdl" 6;
+	setAttr -s 101 ".dli[1:100]"  6 41 8 1 30 20 22 24 
 		2 9 25 3 10 26 4 11 27 12 5 28 13 23 29 15 16 
 		31 7 17 18 19 14 32 21 33 34 44 35 37 36 55 38 42 
 		40 39 45 46 47 48 43 49 50 52 53 54 51 70 56 57 58 
 		59 79 60 62 63 66 64 61 68 69 65 71 72 73 74 75 76 
 		77 78 67 80 81 82 83 84 85 86 87 88 89 90 91 92 93 
-		94 95 96 97 98 99 100 101;
+		94 95 96 97 98 99 100;
 	setAttr -s 2 ".dli";
 createNode animCurveTU -n "L_Up_arm_segmentScaleCompensate";
 	rename -uid "2DCDBA22-424E-E0B0-DA93-6BBDAC40E732";
@@ -680,25 +643,6 @@ createNode animCurveTL -n "R_Up_arm_translateZ";
 	setAttr ".tan" 18;
 	setAttr ".wgt" no;
 	setAttr -s 2 ".ktv[0:1]"  0 -2.5133216590145224e-06 20 -2.5133216590145224e-06;
-createNode lightLinker -s -n "lightLinker1";
-	rename -uid "1CF69EF6-4EA1-601B-D613-59B5FF642C86";
-	setAttr -s 2 ".lnk";
-	setAttr -s 2 ".slnk";
-createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "29A38389-4A9A-4021-6CF9-B9A7854499B8";
-createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "82338A36-4E77-E39A-05FB-7C9C162A6B9A";
-createNode displayLayer -n "defaultLayer";
-	rename -uid "C8758FFF-4C7E-4FB9-1174-69B96170245F";
-createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "57001627-428C-7090-D10C-B893DFA45E8E";
-createNode renderLayer -n "defaultRenderLayer";
-	rename -uid "BE325D43-4DB7-AA78-CBCA-DC8889727547";
-	setAttr ".g" yes;
-createNode script -n "sceneConfigurationScriptNode";
-	rename -uid "7BB4754D-4369-38D6-D494-E095C723612E";
-	setAttr ".b" -type "string" "playbackOptions -min 1.25 -max 150 -ast 1.25 -aet 250 ";
-	setAttr ".st" 6;
 select -ne :time1;
 	setAttr -av -k on ".cch";
 	setAttr -k on ".fzn";
@@ -747,7 +691,7 @@ select -ne :renderPartition;
 	setAttr -cb on ".ihi";
 	setAttr -av -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -s 2 ".st";
+	setAttr -s 92 ".st";
 	setAttr -cb on ".an";
 	setAttr -cb on ".pt";
 select -ne :renderGlobalsList1;
@@ -760,15 +704,27 @@ select -ne :defaultShaderList1;
 	setAttr -cb on ".ihi";
 	setAttr -k on ".nds";
 	setAttr -cb on ".bnm";
-	setAttr -s 4 ".s";
+	setAttr -s 134 ".s";
 select -ne :postProcessList1;
 	setAttr -k on ".cch";
 	setAttr -cb on ".ihi";
 	setAttr -k on ".nds";
 	setAttr -cb on ".bnm";
 	setAttr -s 2 ".p";
+select -ne :defaultRenderUtilityList1;
+	setAttr -k on ".cch";
+	setAttr -cb on ".ihi";
+	setAttr -av -k on ".nds";
+	setAttr -cb on ".bnm";
+	setAttr -s 142 ".u";
 select -ne :defaultRenderingList1;
 	setAttr -k on ".ihi";
+select -ne :defaultTextureList1;
+	setAttr -k on ".cch";
+	setAttr -cb on ".ihi";
+	setAttr -k on ".nds";
+	setAttr -cb on ".bnm";
+	setAttr -s 110 ".tx";
 select -ne :initialShadingGroup;
 	setAttr -av -k on ".cch";
 	setAttr -k on ".fzn";
@@ -820,6 +776,8 @@ select -ne :initialParticleSE;
 	setAttr -cb on ".ai_volume_shaderg";
 	setAttr -cb on ".ai_volume_shaderb";
 lockNode -l 0 -lu 1;
+select -ne :initialMaterialInfo;
+	setAttr -s 2 ".t";
 select -ne :defaultRenderGlobals;
 	setAttr -av -k on ".cch";
 	setAttr -cb on ".ihi";
@@ -975,13 +933,23 @@ select -ne :hardwareRenderGlobals;
 	setAttr -k on ".bswa";
 	setAttr -k on ".shml";
 	setAttr -k on ".hwel";
-connectAttr "layer1.di" "Reference_Position.do";
+select -ne :defaultHideFaceDataSet;
+	setAttr -s 3 ".dnsm";
+select -ne :ikSystem;
+	setAttr -s 4 ".sol";
+select -ne :hyperGraphLayout;
+connectAttr "Base_RIG_layer.di" "Reference_Pelvis.do";
 connectAttr "Reference_Pelvis.s" "Reference_Spine_1.is";
+connectAttr "Base_RIG_layer.di" "Reference_Spine_1.do";
 connectAttr "Reference_Spine_1.s" "Reference_Spine_2.is";
+connectAttr "Base_RIG_layer.di" "Reference_Spine_2.do";
 connectAttr "Reference_Spine_2.s" "Reference_Spine_3.is";
+connectAttr "Base_RIG_layer.di" "Reference_Spine_3.do";
 connectAttr "Reference_Spine_3.s" "Reference_L_Clavicle.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Clavicle.do";
 connectAttr "L_Up_arm_segmentScaleCompensate.o" "Reference_L_Up_arm.ssc";
 connectAttr "Reference_L_Clavicle.s" "Reference_L_Up_arm.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Up_arm.do";
 connectAttr "L_Up_arm_scaleX.o" "Reference_L_Up_arm.sx";
 connectAttr "L_Up_arm_scaleY.o" "Reference_L_Up_arm.sy";
 connectAttr "L_Up_arm_scaleZ.o" "Reference_L_Up_arm.sz";
@@ -993,19 +961,33 @@ connectAttr "L_Up_arm_translateX.o" "Reference_L_Up_arm.tx";
 connectAttr "L_Up_arm_translateY.o" "Reference_L_Up_arm.ty";
 connectAttr "L_Up_arm_translateZ.o" "Reference_L_Up_arm.tz";
 connectAttr "Reference_L_Up_arm.s" "Reference_L_ForeArm.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_ForeArm.do";
 connectAttr "Reference_L_ForeArm.s" "Reference_L_Hand.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Hand.do";
 connectAttr "Reference_L_Hand.s" "Reference_L_Toe_2_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_2_01.do";
 connectAttr "Reference_L_Toe_2_01.s" "Reference_L_Toe_2_02.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_2_02.do";
 connectAttr "Reference_L_Hand.s" "Reference_L_Toe_1_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_1_01.do";
 connectAttr "Reference_L_Toe_1_01.s" "Reference_L_Toe_1_02.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_1_02.do";
 connectAttr "Reference_L_Hand.s" "Reference_L_Toe_3_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_3_01.do";
 connectAttr "Reference_L_Toe_3_01.s" "Reference_L_Toe_3_02.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Toe_3_02.do";
+connectAttr "Reference_L_Hand.s" "Reference_L_WeaponBone.is";
 connectAttr "Reference_Spine_3.s" "Reference_Neck.is";
+connectAttr "Base_RIG_layer.di" "Reference_Neck.do";
 connectAttr "Reference_Neck.s" "Reference_Head.is";
+connectAttr "Base_RIG_layer.di" "Reference_Head.do";
 connectAttr "Reference_Head.s" "Reference_Skull_Scale.is";
+connectAttr "Base_RIG_layer.di" "Reference_Skull_Scale.do";
 connectAttr "Reference_Spine_3.s" "Reference_R_Clavicle.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Clavicle.do";
 connectAttr "R_Up_arm_segmentScaleCompensate.o" "Reference_R_Up_arm.ssc";
 connectAttr "Reference_R_Clavicle.s" "Reference_R_Up_arm.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Up_arm.do";
 connectAttr "R_Up_arm_scaleX.o" "Reference_R_Up_arm.sx";
 connectAttr "R_Up_arm_scaleY.o" "Reference_R_Up_arm.sy";
 connectAttr "R_Up_arm_scaleZ.o" "Reference_R_Up_arm.sz";
@@ -1017,27 +999,33 @@ connectAttr "R_Up_arm_translateX.o" "Reference_R_Up_arm.tx";
 connectAttr "R_Up_arm_translateY.o" "Reference_R_Up_arm.ty";
 connectAttr "R_Up_arm_translateZ.o" "Reference_R_Up_arm.tz";
 connectAttr "Reference_R_Up_arm.s" "Reference_R_ForeArm.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_ForeArm.do";
 connectAttr "Reference_R_ForeArm.s" "Reference_R_Hand.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Hand.do";
 connectAttr "Reference_R_Hand.s" "Reference_R_Toe_2_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_2_01.do";
 connectAttr "Reference_R_Toe_2_01.s" "Reference_R_Toe_2_02.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_2_02.do";
 connectAttr "Reference_R_Hand.s" "Reference_R_Toe_1_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_1_01.do";
 connectAttr "Reference_R_Toe_1_01.s" "Reference_R_Toe_1_02.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_1_02.do";
 connectAttr "Reference_R_Hand.s" "Reference_R_Toe_3_01.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_3_01.do";
 connectAttr "Reference_R_Toe_3_01.s" "Reference_R_Toe_3_02.is";
-connectAttr "Reference_Pelvis.s" "Reference_L_Up_leg.is";
-connectAttr "Reference_L_Up_leg.s" "Reference_L_leg.is";
-connectAttr "Reference_L_leg.s" "Reference_L_foot.is";
-connectAttr "Reference_L_foot.s" "Reference_L_toe.is";
+connectAttr "Base_RIG_layer.di" "Reference_R_Toe_3_02.do";
+connectAttr "Reference_R_Hand.s" "Reference_R_WeaponBone.is";
 connectAttr "Reference_Pelvis.s" "Reference_R_Up_leg.is";
 connectAttr "Reference_R_Up_leg.s" "Reference_R_leg.is";
 connectAttr "Reference_R_leg.s" "Reference_R_foot.is";
 connectAttr "Reference_R_foot.s" "Reference_R_toe.is";
-connectAttr "layerManager.dli[101]" "layer1.id";
-relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
-relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
-relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
-relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
-connectAttr "layerManager.dli[0]" "defaultLayer.id";
-connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
-connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
+connectAttr "Reference_Pelvis.s" "Reference_L_Up_leg.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_Up_leg.do";
+connectAttr "Reference_L_Up_leg.s" "Reference_L_leg.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_leg.do";
+connectAttr "Reference_L_leg.s" "Reference_L_foot.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_foot.do";
+connectAttr "Reference_L_foot.s" "Reference_L_toe.is";
+connectAttr "Base_RIG_layer.di" "Reference_L_toe.do";
+connectAttr "layerManager.dli[16]" "Base_RIG_layer.id";
 // End of reference_human_female_skeleton.ma

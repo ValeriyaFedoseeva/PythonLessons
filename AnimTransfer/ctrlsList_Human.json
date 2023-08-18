@@ -33,5 +33,7 @@
     "FKHip_R", 
     "FKKnee_R", 
     "FKAnkle_R", 
-    "FKToes_R"
+    "FKToes_R",
+    "L_Weapon_ctrl",
+    "R_Weapon_ctrl"
 ]

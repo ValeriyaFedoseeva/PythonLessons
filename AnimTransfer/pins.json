@@ -33,5 +33,7 @@
     "R_Up_leg", 
     "R_leg", 
     "R_foot", 
-    "R_toe"
+    "R_toe",
+    "L_WeaponBone",
+    "R_WeaponBone"
 ]
