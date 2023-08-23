@@ -31,10 +31,6 @@ def main():
         crv_list.append(crv)
         ring = cmds.circle(nr=(0, 0, 1), c=(0, 0, 0), r=1, ch=0)[0]
         mPath = cmds.pathAnimation( ring, crv, fractionMode=1, follow=1, followAxis='z', upAxis='y', worldUpType="scene", inverseUp=0, inverseFront=1, bank=0, startTimeU=1, endTimeU=2)
-        #cmds.delete(mPath)
-        
-
-        #cmds.xform(ring, t = [point_A.x, point_A.y, point_A.z], ws=1)
 
         tube = cmds.extrude(ring, crv, ch=0, rn=0, po=0, et=2, ucp=0, fpt=1, upn=1, rotation=1, scale=1, rsp=1)
         cmds.reverseSurface(tube, d=0, ch=0, rpo=1)
