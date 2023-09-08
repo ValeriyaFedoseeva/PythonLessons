@@ -153,7 +153,7 @@ print(bb)
     "Event" это действие внутри виджета, которое может быть зафиксировано и обработано программой. Такие как поменять курсор при нажатии на кнопку или 
     визуальная смена виджета при перемещением из одного окра в другое. Все зато задает команда event.
 
-# Правктика
+# Практика
 
 ## Задание 1
 
@@ -259,6 +259,62 @@ for item in my_list:
 
 Группа objects является скрытой (соответственно все объекты внутри тоже). Все локаторы (loc_inst_##) расположены где-то в сцене, имеют различные координаты, вращение, масштабы. Ваша задача - заменить эти локаторы на объекты из группы objects. Объекты из этой группы должны быть выбраны для каждого локатора случайно. Замена должна произойти либо копиями объектов из группы (оригиналы остаются в скрытой группе), либо самими оригиналами (при этом количество локаторов и объектов должно совпадать - нужно будет это проверить). Заметьте что локаторы могут находиться либо в корне в Outliner, либо в какой-то группе.
 
+ver 2
+```python 
+
+import maya.cmds as cmds
+import random
+
+scene = cmds.ls(dag=True)
+
+loc = []
+mesh = []
+
+for obj in scene:
+    if cmds.objectType(obj) == "locator":
+        o = cmds.listRelatives(obj, parent=True)
+        loc.append(o)
+
+for obj in scene:
+    if cmds.objectType(obj) == "mesh" or cmds.objectType(obj) == "nurbsSurface":
+        o = cmds.listRelatives(obj, parent=True)
+        mesh.append(o)
+
+# Shuffle the mesh list after populating it
+random.shuffle(mesh)
+
+def place_obj():
+    for l, m in zip(loc, mesh):
+        parent_of_locator = cmds.listRelatives(l, parent=True)
+        mesh_top_node = cmds.listRelatives(m[0], parent=True)
+
+        loc_t = cmds.xform(l, q=True, t=True, ws=True)
+        loc_r = cmds.xform(l, q=True, ro=True, ws=True)
+        new_obj = cmds.duplicate(m)
+
+        # Check if new_obj is already a child of 'world'
+        if not cmds.listRelatives(new_obj, parent=True):
+            cmds.parent(new_obj, world=True)
+
+        cmds.setAttr(new_obj[0] + '.translateX', loc_t[0])
+        cmds.setAttr(new_obj[0] + '.translateY', loc_t[1])
+        cmds.setAttr(new_obj[0] + '.translateZ', loc_t[2])
+
+        if parent_of_locator is None:
+            cmds.parent(new_obj, world=True)
+        else:
+            cmds.parent(new_obj, parent_of_locator)
+
+        cmds.parent(l, mesh_top_node)
+
+# Call the function to place objects
+place_obj()
+
+
+```
+
+
+ver 1
 ```python
 import maya.cmds as cmds
 import random
@@ -285,6 +341,8 @@ for obj in scene:
 # Shuffle the mesh list after populating it
 random.shuffle(mesh)
 
+parent_of_locator = None  # Initialize parent_of_locator variable here
+
 if len(loc) == len(mesh) > 0:
     for l, m in zip(loc, mesh):
         new_obj = cmds.duplicate(m)[0]
@@ -293,7 +351,7 @@ if len(loc) == len(mesh) > 0:
         # Get the parent node for the mesh
         mesh_top_node = cmds.listRelatives(m[0], parent=True)
         if parent_of_locator is None:
-            #cmds.parent(new_obj, world=True)
+
             pass
         else:
             cmds.parent(new_obj, parent_of_locator)
@@ -305,7 +363,6 @@ if len(loc) == len(mesh) > 0:
             loc_rot = cmds.xform(parent_of_locator[0], q=True, ro=True, ws=True)
             cmds.xform(new_obj, t=loc_trans, ro=loc_rot)
         cmds.parent(l, mesh_top_node)
-
 
 else:
     cmds.warning("Objects don't match. Make sure that the number of locators matches the number of mesh objects in the scene.")
