@@ -61,48 +61,48 @@
 ### 7 Опишите, каким образом можно узнать имя любого атрибута ноды (которое подходит для программирования).
     Узнать имя любого атрибута ноды можно при помощи команды cmds.listAttr()
 
-    ```python
-    import maya.cmds as cmds
+```python
+import maya.cmds as cmds
 
-    node = 'Object'
+node = 'Object'
 
-        
-    def get_attr(node):
-        attr = cmds.listAttr(node)
-        return attr
+    
+def get_attr(node):
+    attr = cmds.listAttr(node)
+    return attr
 
-    attr = get_attr(node)
-    print(attr)
+attr = get_attr(node)
+print(attr)
 
-    ```
+```
 
 ### 8 Опишите известные вам способы узнать информацию (координаты, смежные компоненты и т.д.) о любом компоненте объекта (его вершина, ребро и т.д.).
 
-    *1* Можно воспользоваться командой cmds.xform() чтобы узнать координаты конкретного компонента.
+*1* Можно воспользоваться командой cmds.xform() чтобы узнать координаты конкретного компонента.
 
-    ```python
-        import maya.cmds as cmds
+```python
+    import maya.cmds as cmds
 
-    cmds.select('pCube1.vtx[3]')
-    vtx_pos = cmds.xform(query=True, translation=True)
-    print(vtx_pos)
-    
-    ```
+cmds.select('pCube1.vtx[3]')
+vtx_pos = cmds.xform(query=True, translation=True)
+print(vtx_pos)
+
+```
 
 
-    *2* Можно вернуть информацию о Bounding Box объекта при помощи команды cmds.xform:
-    
-    ```python
+*2* Можно вернуть информацию о Bounding Box объекта при помощи команды cmds.xform:
 
-     import maya.cmds as cmds
+```python
 
-    cmds.select('pCube1')
-    bb = cmds.xform(query=True, boundingBox=True)
-    print(bb)   
+    import maya.cmds as cmds
 
-    ```
+cmds.select('pCube1')
+bb = cmds.xform(query=True, boundingBox=True)
+print(bb)   
 
-    *3* Более продвинутый способ решить эту задачу будет с использованием Open Maya.
+```
+
+*3* Более продвинутый способ решить эту задачу будет с использованием Open Maya.
 
 ### 9 Что такое DAG нода и почему в outliner не DAG ноды скрыты по умолчанию?
 
