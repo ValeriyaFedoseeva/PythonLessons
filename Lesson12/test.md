@@ -236,7 +236,15 @@ my_list = [
     "G_red_truck333",
 ]
 
-pattern = r'^[A-Z]_(.*_(car|bus|truck)_\d{3})$'
+pattern = r'^[A-Z]_(.*_(car|bus|truck)_\d{3})$' 
+
+'''
+[A-Z] matches any uppercase letter.
+_ matches the underscore character.
+(.*_(car|bus|truck)_\d{3}) captures a group that * matches any character (except newline) zero or more times.
+(car|bus|truck) matches either "car", "bus", or "truck".
+\d{3} matches exactly three digits.
+'''
 
 for item in my_list:
      if re.match(pattern, item):
